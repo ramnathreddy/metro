@@ -20,3 +20,15 @@ called tc-config.xml.
 
 This page on Empower appears to have some good info for you to follow: 
 https://empower.softwareag.com/sl24sec/SecuredServices/document/java/Troubleshooting/atg/Integration_Server_Terracotta_Cluster_Troubleshooting.html 
+
+
+Terracotta’s architecture is substantially different from that of Oracle Coherence. Coherence was installed as a library within the 
+Integration Server container, and a cluster was formed by configuring multiple Coherence instances to communicate with each other.
+Coherence did not run on a separate server or even in a separate Java Virtual Machine (JVM®). 
+The minimum cluster size recommended was four nodes, and it relied on multicast, a less desirable option for cloud environments.
+
+Terracotta has two components: the local Ehcache library and the Terracotta Server Array (TSA). 
+The local Ehcache library, installed with webMethods Integration Server, is used for in-memory caching of local data and runs
+within the Integration Server JVM. The TSA provides distributed caching and clustering. In order to cluster multiple webMethods 
+servers or share information between multiple servers, the TSA is installed as a separate run- time.
+
