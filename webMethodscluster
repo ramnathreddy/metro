@@ -2,7 +2,9 @@ Cluster setup:
 
 for clustering we have used oracle coherance and terracotta. What does your project use for IS clustering in test and prod environments?
 
- yes, you will need either Coherence and Terracotta. If I recall correctly, 8.2 was the last version to offer Coherence as an option. Since then, the only option is Terracotta. Therefore, we can scratch the idea of using Coherence because it makes no sense for you to setup a Coherence-based cluster now and then have to convert it to Terracotta in your next upgrade. 
+ yes, you will need either Coherence and Terracotta. If I recall correctly, 8.2 was the last version to offer Coherence as an option.
+ Since then, the only option is Terracotta. Therefore, we can scratch the idea of using Coherence because it makes no sense for you to
+ setup a Coherence-based cluster now and then have to convert it to Terracotta in your next upgrade. 
 
 Terracotta requires additional installation and configuration so one of the first things you will have to do is
 
@@ -19,7 +21,8 @@ Once Terracotta is installed, you now need to configure it. The vast majority of
 called tc-config.xml. 
 
 This page on Empower appears to have some good info for you to follow: 
-https://empower.softwareag.com/sl24sec/SecuredServices/document/java/Troubleshooting/atg/Integration_Server_Terracotta_Cluster_Troubleshooting.html 
+https://empower.softwareag.com/sl24sec/SecuredServices/document/java/Troubleshooting/atg/Integration_Server_
+Terracotta_Cluster_Troubleshooting.html 
 
 
 Terracotta’s architecture is substantially different from that of Oracle Coherence. Coherence was installed as a library within the 
@@ -32,3 +35,14 @@ The local Ehcache library, installed with webMethods Integration Server, is used
 within the Integration Server JVM. The TSA provides distributed caching and clustering. In order to cluster multiple webMethods 
 servers or share information between multiple servers, the TSA is installed as a separate run- time.
 
+https://techcommunity.softwareag.com/techniques-blog/-/blogs/webmethods-and-terracotta
+it is recommended that webMethods customers configure their Terracotta Server Array to have a single stripe that contains
+two TSA servers.
+ One server is the active instance and the other is the passive instance. Deploying each Terracotta server instance
+ on its own machine will provide
+ the highest level of failover and high availability, but it is not required. 
+ In order for cluster nodes to share data, they only need to ensure connectivity to the Terracotta Server Array and not between 
+ all cluster nodes.
+ This is similar to ensuring database connectivity, a familiar paradigm for administrators. Unlike the Coherence architecture, 
+ Terracotta supports clusters of less than four nodes.
+ 
