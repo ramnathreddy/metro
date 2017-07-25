@@ -1,0 +1,22 @@
+Cluster setup:
+
+for clustering we have used oracle coherance and terracotta. What does your project use for IS clustering in test and prod environments?
+
+ yes, you will need either Coherence and Terracotta. If I recall correctly, 8.2 was the last version to offer Coherence as an option. Since then, the only option is Terracotta. Therefore, we can scratch the idea of using Coherence because it makes no sense for you to setup a Coherence-based cluster now and then have to convert it to Terracotta in your next upgrade. 
+
+Terracotta requires additional installation and configuration so one of the first things you will have to do is
+
+(1) identify what version of Terracotta you need for your version of IS 
+(http://documentation.softwareag.com/webmethods/wmsuites/Current_webMethods_and_Terracotta_Compatibility_Matrix.pdf) and then 
+(2) download that version of Terracotta from Empower. 
+
+Next, you'll have to install it, which typically involves unzipping a file into a directory of your choice. The basic clustering license 
+allows you to create a simple Terracotta Server Array (TSA) with a pair of active-passive servers, which means you'll likely be installing
+Terracotta on two separate servers. Many customers with the typical 2-node cluster choose to simply install Terracotta on the same 
+servers as the IS but you don't have to do this. Up to you. 
+
+Once Terracotta is installed, you now need to configure it. The vast majority of the configuration is done through a file 
+called tc-config.xml. 
+
+This page on Empower appears to have some good info for you to follow: 
+https://empower.softwareag.com/sl24sec/SecuredServices/document/java/Troubleshooting/atg/Integration_Server_Terracotta_Cluster_Troubleshooting.html 
