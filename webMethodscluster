@@ -46,3 +46,8 @@ two TSA servers.
  This is similar to ensuring database connectivity, a familiar paradigm for administrators. Unlike the Coherence architecture, 
  Terracotta supports clusters of less than four nodes.
  
+ Local caching of XML parser docs and service results.  Server-side caching of cluster state, sessions, nonce and Oauth tokens for
+ authentication
+webMethods 8.2 through 9.6 are compatible with Terracotta 3.7. As licensed with webMethods, this version of Terracotta does not allow off-heap storage to be used. 
+Integration Server customers have a pub.cache service to add local caching capabilities to their applications.
+webMethods 9.7 through 9.9 are compatible with Terracotta 4.1 or 4.3, sold as Terracotta BigMemory.  
