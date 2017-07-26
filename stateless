@@ -1,0 +1,12 @@
+Stateless services
+
+If a stateless service is invoked (Stateless=True), then IS still establishes a session, but the session is immediately terminated 
+as soon as the top-level service completes the execution and IS does not pass a session cookie back to the client.
+Use of stateless services can help improve performance of an IS by releasing session resources as soon as they are no longer needed.
+
+Stateful services
+
+In a default condition (Stateless=False), IS establishes a session and passes the session ID to the client in the session cookie.
+After the service invocation, IS keeps the session object in memory for future calls.The session is terminated either by the client 
+explicitly destroying the session (e.g. by invoking wm.server:disconnect) or when the session times out after a given period of inactivity. The session timeout defaults to 10 minutes and can be configured in IS Administrator under Settings > Resources.
+
