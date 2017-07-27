@@ -1,1 +1,60 @@
 
+https://docs.oracle.com/cd/E17984_01/doc.898/e14693/e1_as_web_service_provid.htm
+
+
+ Calling a Database Operation:
+
+You can create business service methods that call database operations. Database operations include query, insert, update, and delete.
+You use the business service foundation Database Call Wizard to create these business services.
+
+
+ Transaction Processing
+
+Transaction processing is a way to update the JD Edwards EnterpriseOne database. A transaction is a logical unit of work performed on the
+database to complete a common task and maintain data consistency. The database is updated when a transaction is either automatically or 
+manually committed. The business service framework provides two types of default transactions: manual commit connection and auto commit
+connection.
+
+For a single manual commit transaction, the default behavior is to scope all processing within the published business service method. If 
+any operation within this scope fails, all operations are rolled back, and the published business service method throws an exception. 
+This behavior is recommended when you commit multiple records to multiple tables.
+
+For a single auto commit transaction, the default behavior is for each operation to commit or roll back immediately, which means that
+each table update within each business function call is either committed or rolled back immediately. This behavior is recommended for 
+queries for which no transaction is needed or when you commit a single record to a single table.
+
+
+When you are deciding which type of connection to use, you should always consider the business function behavior.
+
+Default transaction behavior should cover most scenarios, but you can define a business service method that explicitly manages transactions.
+When determining whether a business service requires explicit transaction processing, you should review current JD Edwards EnterpriseOne
+functionality in the application. If the application uses explicit transaction processing, you should carefully review whether the
+business service should handle transaction processing the same way.
+
+The Business Service Development Methodology guide provides a detailed discussion about transaction processing. In addition, the chapters 
+pertaining to creating a published business service and creating a business service provide an overview of creating a transaction.
+
+See also:
+
+"Transaction Processing, Auto Commit" in the JD Edwards EnterpriseOne Tools Business Services Development Methodology Guide.
+
+ Business Service Properties
+
+Business service properties provide a way for you to change a value in a business service method without changing the method code.
+A business service property consists of a key and a value. The key is the name of the business service property and cannot be changed.
+Business service properties are OMW objects.You can use OMW or the Business Service Property Admin program (P951000) to
+create and maintain them.
+
+ Creating a Custom Published Business Service
+ JD Edwards EnterpriseOne provides reference implementations that you can use as a model for creating a published business service.
+ The reference implementations are for reference only and are not intended to be used in a production environment. The following steps 
+ provide how-to information for creating a custom published business service that can be exposed as a web service:
+ 
+1) Determine whether to create a new published business service or extend an existing published business service.
+2) Create a new OMW object for the published business service.
+3) Add classes to the published business service object.
+
+Create published business service class.
+    – Name the published business service class.
+    – Create a transaction.
+    – Name the published business service methods.
