@@ -2,4 +2,7 @@ pub.schema.validate     ----for validate service
     [[we can use buitin validate service or TN buit in validation or  custom  validate service or
     validate input or output validation.. input or output validation is  not recomended. ]]
 pub.flow:getlost error      ----to get detailed information about last exception
+pub.event:exceptioninfo         ---contain information about last error
+pub.date:getCurrentDatastring       ---get current date and format
+
 
