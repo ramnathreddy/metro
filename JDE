@@ -58,3 +58,28 @@ Create published business service class.
     – Name the published business service class.
     – Create a transaction.
     – Name the published business service methods.
+    
+    Create value object classes.
+
+Create business function value object classes.
+
+– Name the input value object classes.
+
+– Name the response value object classes.
+
+– Use valid data types.
+Create database operation value object classes.
+
+– Name the input value object classes.
+
+– Name the response value object classes.
+
+– Use valid data types.
+
+Add business logic.
+
+Call business services.
+Handle errors.
+Format data.
+Test the published business service.
+
