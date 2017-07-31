@@ -1,0 +1,51 @@
+To convert an edi document to flat file we have to follow the below procedure. Firstly, 
+Create a Dictionary: 
+To create a Dictionary we have to use SEFParse Java Service (WmEDI-wm.b2b.edi: SEFParse). This service is used for generating Flat File dictionaries and schemas.
+
+alt
+
+In SEFParser Service assign the following values in Service In under Pipeline Tab.
+ SEFFileName:webMethods6IntegrationServerpackagesWmEDIpubSEFSX124010.sef (Here we parsing 4010 version EDI so we have to give 4010.sef).
+ EDIDocName: Since we are parsing a 210 EDI we have to give the name asâ210â.
+ Version: Its an optional filed here we can give version as â4010â.
+ TargetSchema: Give the path of Schema where you want to create it  (Example: EDI_Parse: T210).
+ TargetPackage: Give the package name (Ex: Default).
+ TargetDictionary: Create an empty dictionary and give its path in this filed (Example: EDI_Parse: D210).
+Now run the Parser service and refresh the server then automatically schema will be generated and dictionary will be filled with fields. 
+ Create a Document Type:
+
+alt
+
+ Select Schema in the Navigation Panel (Ex: T210)
+ Now Click on Flat File Structure tab and click on document symbol then a document type will be created (EDI_Parse: T210DT).
+Parsing Service:
+Now create a service (example ParseEDI) for parsing an EDI file. 
+First take the envelope process for validating the EDI file (WmEDIsamples-sampleServices: X12Values).
+
+
+ Now click on âenvelope processâ service and double click on âedidataâ under pipeline tab and assign the edi 210 file.
+
+ Assign the path of the schema in âEDIffSchemaâ field (Ex: EDI_ParseT210).
+Take the Reference Document Type of EDI in pipeline out (Ex: T210DT).
+ Now map EDIValues to the Reference Document Type.
+
+
+Insert a map step and map the required fields from EDI Reference Doc to another Flat File Document type (Ex: FlatSchemaDT).
+While mapping from multiple document to single document we have to convert multiple document to a single document by using a loop step and then map the fields.
+While mapping to a multiple document use âappendToDocumentListâ service. 
+Using appendToDocumentList Service:
+Copy all fields from multiple documents.
+Take a single document and append all fields under that document.
+Now map the required fields to single document and assign null values to remaining fields.
+
+
+Now use appendToDocumentList Service as shown above.
+Take multiple document list in âPipeline Inâ under âPipelineâ tab (Ex: SingleDocList).
+Now map Single document to âfromItemâ and multiple document to âtoListâ(Ex:SingleDoc to fromItem and SingleDocLIst to toList).
+Now map toList in âService Outâ to SingleDocList in PipeLine Out.
+Now map this SingleDocList to main Multiple document list.
+
+
+  Now insert convertToString Service (WmFlatFile-pub.flatFile: convertToString) and map Flat file Document type to ffValues.
+  Give Flat file Schema by double clicking ffSchema Ex: EDI_Parse: FlatSchema).
+ We will get Flat File String as output.
