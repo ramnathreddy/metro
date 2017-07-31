@@ -15,6 +15,10 @@ EDI                 EDI 810 INvoice
  
  EDI SERVICESS:
                        wm.b2b.edi:convertToValues
+                  
+
+get those mapping specs from your business analyst/functional area team and follow up with them to
+create excel sheet with source to target field mappings (edi to xml or xml to edi what ever format is)
                        
                        
 Sample Business Process
