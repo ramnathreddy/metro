@@ -1,0 +1,31 @@
+Pre requisites:
+ 
+                  Flat file Dictionary
+                  Flat file schema DT
+                  Flat file schema         
+                  EDI Dictionary(empty)
+                  EDI schema DT (created through set parse)
+                  EDI schema
+                  
+Wm EDI: b2b : Edi : SEFParse :
+ Sefparse (For populating Edi dictionary with data and for creating Edi schema & DT)
+ 
+1) Get flat file data into IS using
+Ã  Pub : file : get file
+ 
+2) convert byte data to values by this service and map accordingly
+Ã  Pub.flat file. Convert to values
+           Map the below variables:
+                                                            Bytes â flat file data
+                                                            Flat file schema â path
+                                                           pipe out  :  flat file schema DT   ref.
+                                                          Flat file schema DT  - EDI schema DT
+ 
+3) Convert the values to string using the service and map the values accordingly
+                                      Wm : b2b : edi. Convert to string
+                                           Map the below variables:
+                                           EDI schema DT -  values
+                                          Flat file schema -  path of EDI schema
+ 
+4)  Write the output to destination folder using the servicd:
+                                    Sample . Io .test .write to file
