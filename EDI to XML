@@ -1,0 +1,91 @@
+EDI                 EDI 810 INvoice
+                    EDI 812 - Credit/Debit Adjustment
+                    EDI 820 - Payment Order/Remittance Advic
+                    EDI 840 - Request for Quotation
+                    EDI 850 Purchase Order change request- Buyer intiated
+                    EDI 854 - Shipment Delivery Discrepancy Information
+                    EDI 855 - Purchase Order Acknowledgment
+                    EDI 856 - Ship Notice/Manifest
+                    EDI 857 - Shipment and Billing Notice
+                    EDI 858 - Shipment Information
+                    EDI 870 - order Status Report
+                  
+                    EDI 997 Functional Acknowledgment
+                  
+ 
+ EDI SERVICESS:
+                       wm.b2b.edi:convertToValues
+                       
+                       
+Sample Business Process
+The WmEDIsamples package, which you can download from the Knowledge Base on the Advantage Web
+site at http://advantage.webmethods.com, provides a sample that illustrates one way of using EDI
+documents in a business process. To read an overview of the sample, learn how to set it up and to run it,
+perform the following procedure.
+
+Note: If you intend to also run the sample provided for the webMethods EDIINT Module
+(which is also included in the WmEDIsamples package), set up the EDIINT Module
+sample before setting up this sample business process.
+ 
+ 
+Demonstrates the use of the iterator variable of the wm.b2b.edi:convertToValues service to parse large input data
+by processing it piece by piece. Each time the wm.b2b.edi:convertToValues service is invoked, the iterator
+variable is set to true. 
+The format of the EDIFFSchema.X12.V4010:Sample810_Large flat file schema dictates how the service processes
+the sample 810 document. This flat file schema defines three top-level segment structures: 1) ST, 2) IT1, and
+3) TDS.
+The first time the Iterator810 service invokes the wm.b2b.edi:convertToValues service, the ST segment structure is
+processed. It reads the input data from the sample 810 document until it encounters the next top-level
+segment structure, which is the first IT1 segment structure. The Iterator810 service invokes the
+wm.b2b.edi:convertToValues service for each IT1 segment structure until it encounters the TDS segment
+structure. After processing the TDS segment structure, the Iterator810 service exists the REPEAT loop
+because there is no more input data. The Iterator810 service determines there is no more input when
+ediObject, which is an output parameter from the wm.b2b.edi:convertToValues service, is null.
+Because the wm.b2b.edi:convertToValues service always returns its output in EDIValues, each pass of the service
+invocation should save the output or map it somewhere else. In this example, the main iteration maps each
+segment under ISA. In the iteration steps under the ST segment, an empty sequence operation is used. This
+can be replaced by services that process one item in the invoice. The services have access to the current
+items as well as all of the information in ISA, GS, ST and other segments under ST.This service does not
+validate or check the structure of any segments.
+
+http://techcommunity.softwareag.com/download/codesamples/WmEDIsamples_Doc.pdf
+http://wm.idn-xchange.com/blogs/28-webmethods-step-by-step-edi-to-xml-file.html
+
+TASK: EDI To XML
+OS: WindowsOS
+Platform: webMethods 6.1
+
+This task takes EDI data and converts it into XML data. 
+To achieve this, the following Flow Steps are usedâ¦ 
+1.    pub.file:getFile
+2.    wm.b2b.edi:convertToValues
+3.    pub.xml:documentToXMLString
+4.    sample.IO.test:writeToFile
+
+1. pub.file:getFile: 
+This flow step reads the data according to the specified path and converts into bytes.
+alt
+
+Set the Filename path and overwriteflag 
+Mapping for this flow step.
+
+alt
+
+2. wm.b2b.edi:convertToValues: 
+ConvertToValues service is used to convert the bytes into EDIValues using the EDI schema. (For creating EDI Schema refer How to Create EDI Schema?) 
+            Mapping for this flow step.
+alt
+
+3. pub.xml:documentToXMLString: 
+documentToXMLString service is used to convert the EDIValues into XML data. 
+Mapping for this flow step.
+
+alt
+
+4. sample.IO.test: writeToFile:
+This flow takes the XMLData and writes into the XML file according to specified path.
+Mapping for this flow step
+
+alt
+
+Ã  OverwriteFlag must be specified to overwrite/Append  
