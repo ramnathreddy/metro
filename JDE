@@ -83,3 +83,43 @@ Handle errors.
 Format data.
 Test the published business service.
 
+Testing a Published Business Service
+
+You use tooling provided by JDeveloper to test and debug published business service methods. The published business service class is
+generated to a web service described in Web Services Description Language (WSDL) format and run on a J2EE server (OC4J) 
+embedded within JDeveloper.
+
+JD Edwards EnterpriseOne can call and process external web services.
+ To enable JD Edwards EnterpriseOne as a web services consumer,  you create a business service that uses a web service proxy to call an
+ external web service
+After the published business service is tested as a web service, you verify that the WSDL is compliant. You use JDeveloper for this task.
+
+ A method in that business service can be called by a JD Edwards EnterpriseOne business function. The business service resides on
+ the business services server and is written in the Java programming language. The business service contains a web service proxy 
+ that you generate using JDeveloper. The business function resides in your enterprise server and is written in the C programming 
+ language. The business function calls the business service method.
+ 
+ JDENet is the communication mechanism between the servers.
+ 
+ 
+ Business Function APIs for Calling a Business Service
+
+These APIs are available for a business function to call a business service method:
+
+jdeCallBusinessService
+jdeCallBusinessServiceNoResponse
+jdeFreeBSSVPayloadReturn
+jdeGetBusinessServiceErrorText
+Two APIs are available for calling a business service method from a business function:
+
+jdeCallBusinessService
+
+This API makes a synchronous call to the business services server passing in an XML document that represents the value object for the
+called business service method. The call waits until the business service method finishes before processing.
+
+jdeCallBusinessServiceNoResponse
+
+This API makes an asynchronous call to the business services server passing in an XML document that represents the value object for
+the called business service method. The API returns immediately after sending the message without waiting for a response.
+
+
