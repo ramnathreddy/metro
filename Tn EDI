@@ -1,0 +1,4 @@
+In TN there is a module EDI and EDIINT which bring AS2 capability. So you 
+define on your partner profile AS2 fields and create a routing rule which 
+will deliver files to the partner using AS2 tab. Should work. Please check 
+EDI guides on advantage. 
