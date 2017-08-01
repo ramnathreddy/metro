@@ -124,3 +124,29 @@ the called business service method. The API returns immediately after sending th
 
 
 
+
+http://www.oracle.com/technetwork/middleware/fmw4apps/jde/consuming-external-web-services-182155.pdf
+
+
+
+
+
+
+Note that Business Service object names should start with a J (Java).
+Also note that the Package Prefix is only visible if BSSV is selected as the Source Language. 
+
+The WSDL (Web Services Description Language) document is the ‘contract’ that describes the service to the
+outside world and other systems. It provides information such as where to find the service (the service
+element defining the endpoint), how to communicate with it (the binding element), the data structures that will
+be passed to and from the service (the types element), and the functions that are available (the interface
+element).
+Browse the lists of web services available on publicly available libraries of services, such as
+http://www.xmethods.net/ and http://wsfinder.jot.com/WikiHome. These sites allow you to obtain the URL to
+the WSDL document or to download the document for use in creating the Web Service Proxy.
+For this tutorial, we will use the WSDL document located at
+http://www.alagad.com/WebServices/fortune/fortune.cfc?wsdl
+
+The Web Service Proxy Client is the code that will communicate with the external web service using the
+information provided by the WSDL document. The proxy client uses the SOAP message protocol. 
+
+
